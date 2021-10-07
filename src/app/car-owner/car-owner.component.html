@@ -1,0 +1,29 @@
+<h1>Владельцы автомобилей</h1>
+<div id="btn">
+    <button class="btn btn-primary" >Добавить</button>
+    <button class="btn btn-primary">Просмотр</button>
+    <button class="btn btn-primary">Редактировать</button>
+    <button class="btn btn-primary">Удалить</button>
+</div>
+<table class="table table-striped" >
+    <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Количество автомобилей</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let owner of owners">
+            <tr>
+                <td>{{owner.aLastName}}</td>
+                <td>{{owner.aFirstName}}</td>
+                <td>{{owner.aMiddleName}}</td>
+                <td>{{owner.aCars.length}}</td>
+            </tr>
+</ng-container>
+    </tbody>
+    
+
+</table>

@@ -1,1 +1,7 @@
-<app-car-owner></app-car-owner>
+<app-edit-owner *ngIf="formOpen; else carOwners" (onExit)="closeForm()" [owner]="editOwner" [isReadOnly]="isReadOnly">
+</app-edit-owner>
+
+<ng-template #carOwners>
+    <app-car-owner (addEvent)="onAdding()" (editEvent)="onEditing($event)" (viewEvent)="onViewing($event)">
+    </app-car-owner>
+</ng-template>

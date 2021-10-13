@@ -1,0 +1,114 @@
+<form novalidate [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div class="form-group" hidden>
+    <label for="id">Id</label>
+    <input id="id" type="number" class="form-control" formControlName="id">
+  </div>
+  <div class="form-group">
+    <label for="aLastName">Фамилия</label>
+    <input id="aLastName" type="text" class="form-control" formControlName="aLastName" [readonly]="atrControl">
+    <div
+      *ngIf="myForm.controls['aLastName'].invalid && (myForm.controls['aLastName'].dirty || myForm.controls['aLastName'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="myForm.controls['aLastName'].errors?.required">
+        Введите фамилию.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="aFirstName">Имя</label>
+    <input id="aFirstName" type="text" class="form-control" formControlName="aFirstName" [readonly]="atrControl">
+    <div
+      *ngIf="myForm.controls['aFirstName'].invalid && (myForm.controls['aFirstName'].dirty || myForm.controls['aFirstName'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="myForm.controls['aFirstName'].errors?.required">
+        Введите имя.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="aMiddleName">Отчество</label>
+    <input id="aMiddleName" type="text" class="form-control" formControlName="aMiddleName" [readonly]="atrControl">
+    <div
+      *ngIf="myForm.controls['aMiddleName'].invalid && (myForm.controls['aMiddleName'].dirty || myForm.controls['aMiddleName'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="myForm.controls['aMiddleName'].errors?.required">
+        Введите отчество.
+      </div>
+    </div>
+  </div>
+
+
+  <h1>Автомобили</h1>
+  <div class="form-group border">
+    <div formArrayName="aCars" *ngFor="let item of getControls(); let i = index">
+      <div [formGroupName]="i" id="form-car">
+
+        <div class="form-group">
+          <label for="brandCar">Номер</label>
+          <input id="numberCar" type="text" class="form-control" formControlName="numberCar" [readonly]="atrControl">
+          <div
+            *ngIf="acars.controls[i].get('numberCar')?.invalid && (acars.controls[i].get('numberCar')?.dirty || acars.controls[i].get('numberCar')?.touched)"
+            class="alert alert-danger">
+            <div *ngIf="acars.controls[i].get('numberCar')?.errors?.required" class="error">
+              Введите гос.номер.
+            </div>
+            <div *ngIf="acars.controls[i].get('numberCar')?.errors?.pattern" class="error">
+              Неправильный гос.номер.
+            </div>
+            <div *ngIf="acars.controls[i].get('numberCar')?.hasError('NumberCarExist')" class="error">
+              Такой гос.номер уже есть в базе.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="brandCar">Марка</label>
+          <input id="brandCar" type="text" class="form-control" formControlName="brandCar" [readonly]="atrControl">
+          <div
+            *ngIf="acars.controls[i].get('brandCar')?.invalid && (acars.controls[i].get('brandCar')?.dirty || acars.controls[i].get('brandCar')?.touched)"
+            class="alert alert-danger">
+            <div *ngIf="acars.controls[i].get('brandCar')?.errors?.required" class="error">
+              Введите марку.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="modelCar">Модель</label>
+          <input id="modelCar" type="text" class="form-control" formControlName="modelCar" [readonly]="atrControl">
+          <div
+            *ngIf="acars.controls[i].get('modelCar')?.invalid && (acars.controls[i].get('modelCar')?.dirty || acars.controls[i].get('modelCar')?.touched)"
+            class="alert alert-danger">
+            <div *ngIf="acars.controls[i].get('modelCar')?.errors?.required" class="error">
+              Введите модель.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="yearCar">Год</label>
+          <input id="yearCar" type="number" class="form-control" formControlName="yearCar" [readonly]="atrControl">
+          <div
+            *ngIf="acars.controls[i].get('yearCar')?.invalid && (acars.controls[i].get('yearCar')?.dirty || acars.controls[i].get('yearCar')?.touched)"
+            class="alert alert-danger">
+            <div *ngIf="acars.controls[i].get('yearCar')?.errors?.required" class="error">
+              Введите год.
+            </div>
+            <div *ngIf="acars.controls[i].get('yearCar')?.errors?.min " class="error">
+              Год меньше 1991.
+            </div>
+            <div *ngIf="acars.controls[i].get('yearCar')?.errors?.max " class="error">
+              Год больше текущего.
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-danger " type="button" (click)="deleteCar(item)" [hidden]="hidden">Удалить</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="button" (click)="addNextCar()" [hidden]="hidden">Добавить
+      автомобиль</button>
+    <button class="btn btn-primary" type="submit" [hidden]="hidden" [disabled]="myForm.invalid">Сохранить</button>
+    <button class="btn btn-primary" (click)="exitForm()">Назад</button>
+  </div>
+</form>

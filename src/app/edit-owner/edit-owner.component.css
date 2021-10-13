@@ -1,0 +1,22 @@
+form{
+    width: 60%;
+    margin: 20px 0 20px 20px;
+    
+}
+#form-car{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    
+}
+button.btn{
+    margin:  40px 5px 20px 20px;
+}
+input{
+    margin: 5px;
+       
+}
+
+.error{
+    color: rgb(210, 30, 30);
+}

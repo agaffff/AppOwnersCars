@@ -2,4 +2,18 @@
     display: flex;
     justify-content: space-around;
     width: 500px;
+    margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 10px;
+
 }
+table{
+    margin: 20px 0px 50px 20px;
+    width: 50%;
+}
+
+tr:hover{
+    background-color: blanchedalmond;
+    cursor: pointer;
+}
+

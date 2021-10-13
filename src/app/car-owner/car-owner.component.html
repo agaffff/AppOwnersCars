@@ -1,13 +1,14 @@
-<h1>Владельцы автомобилей</h1>
+<h1 style="text-align: center;">Владельцы автомобилей</h1>
 <div id="btn">
-    <button class="btn btn-primary" >Добавить</button>
-    <button class="btn btn-primary">Просмотр</button>
-    <button class="btn btn-primary">Редактировать</button>
-    <button class="btn btn-primary">Удалить</button>
+    <button class="btn btn-primary" (click)="onAdd()">Добавить</button>
+    <button class="btn btn-primary" (click)="onView(selectedOwner)">Просмотр</button>
+    <button class="btn btn-primary" (click)="onEdit(selectedOwner)">Редактировать</button>
+    <button class="btn btn-primary" (click)="onDelete(selectedOwner)">Удалить</button>
 </div>
-<table class="table table-striped" >
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
+            <th>Id</th>
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
@@ -15,15 +16,14 @@
         </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let owner of owners">
-            <tr>
+        <ng-container *ngFor="let owner of owners; let i = index;">
+            <tr (click)="selectOwner(owner);">
+                <td>{{owner.id}}</td>
                 <td>{{owner.aLastName}}</td>
                 <td>{{owner.aFirstName}}</td>
                 <td>{{owner.aMiddleName}}</td>
                 <td>{{owner.aCars.length}}</td>
             </tr>
-</ng-container>
+        </ng-container>
     </tbody>
-    
-
 </table>
